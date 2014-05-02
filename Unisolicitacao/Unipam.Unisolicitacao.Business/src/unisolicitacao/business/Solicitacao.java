@@ -99,7 +99,7 @@ public class Solicitacao implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "idSolicitacaoGerada", nullable = false)
+	@JoinColumn(name = "idSolicitacaoGerada", nullable = true)
 	public Solicitacao getSolicitacao() {
 		return this.solicitacao;
 	}

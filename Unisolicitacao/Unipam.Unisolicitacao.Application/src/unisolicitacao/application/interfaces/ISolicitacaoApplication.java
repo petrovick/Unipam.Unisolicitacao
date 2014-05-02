@@ -9,5 +9,5 @@ import unisolicitacao.business.Solicitacao;
 public interface ISolicitacaoApplication extends IGenericApplication<Solicitacao, Integer>
 {
 	public abstract Set<String> salvarSolicitacao(Solicitacao solicitacao);
-	public List<Solicitacao> listarPorSolicitacao(Integer numeroSolicitacao,String... joins);
+	public abstract List<Solicitacao> listarPorSolicitacao(Integer numeroSolicitacao,String... joins);
 }

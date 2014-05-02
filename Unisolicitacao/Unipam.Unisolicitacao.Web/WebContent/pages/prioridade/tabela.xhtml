@@ -21,7 +21,7 @@ and open the template in the editor.
 				<p:growl id="message" showDetail="false" />
 				
 				<p:dataTable var="prioridade" id="tabela"
-				value="#{prioridadeController.getPrioridadeSelectItem()}"
+				value="#{prioridadeController.todos()}"
 				paginator="true" rows="15"
 				emptyMessage="Nenhuma prioridade cadastrada" 
                 rowKey="#{prioridade.idPrioridade}" 

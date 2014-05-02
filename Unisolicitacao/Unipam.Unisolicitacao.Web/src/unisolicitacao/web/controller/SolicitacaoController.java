@@ -12,7 +12,11 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.NamedEvent;
 
 import unisolicitacao.application.factory.ApplicationFactory;
+import unisolicitacao.application.interfaces.ISetorApplication;
+import unisolicitacao.application.interfaces.ISistemaModuloApplication;
+import unisolicitacao.application.interfaces.ISituacaoApplication;
 import unisolicitacao.application.interfaces.ISolicitacaoApplication;
+import unisolicitacao.application.interfaces.IUsuarioApplication;
 import unisolicitacao.business.Solicitacao;
 @ManagedBean
 @RequestScoped
@@ -21,11 +25,23 @@ public class SolicitacaoController
 	private Solicitacao solicitacao;
 	private List<Solicitacao> solicitacoes;
 
-	private ISolicitacaoApplication solicitacaoApplication = ApplicationFactory.getInstance().getSituacaoApplication();
-	
+	private ISolicitacaoApplication solicitacaoApplication = ApplicationFactory.getInstance().getSolicitacaoApplication();
+	private ISituacaoApplication situacaoApplication = ApplicationFactory.getInstance().getSituacaoApplication();
+	private IUsuarioApplication usuarioApplication = ApplicationFactory.getInstance().getUsuarioApplication();
+	private ISistemaModuloApplication sistemaModuloApplication = ApplicationFactory.getInstance().getSistemaModuloApplication();
+	private ISetorApplication setorApplication = ApplicationFactory.getInstance().getSetorApplication();
 	
 	public void salvar()
 	{
+		//solicitacao.setSistemaModulo();
+		//solicitacao.setSituacao(situacao);
+		//solicitacao.setSetorByIdSetorOrigem();
+		//solicitacao.setUsuario(usuario);
+		//solicitacao.setDataSolicitacao(dataSolicitacao);
+		//solicitacao.setSolicitacao(solicitacao);
+		
+		
+				
 		System.out.println("Salvar solicitação");
 		Set<String> erros = solicitacaoApplication.salvarSolicitacao(solicitacao);
 		if(erros.isEmpty())

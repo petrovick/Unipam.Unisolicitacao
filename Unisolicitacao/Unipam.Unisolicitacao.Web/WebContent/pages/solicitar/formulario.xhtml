@@ -2,7 +2,7 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://java.sun.com/jsf/core">
     
     
 	 <p:fieldset legend="Cadastrar Solicitação" >
@@ -10,22 +10,40 @@
 			<p:panel header="Solicitação" id="painelCadastro">
 				<p:growl id="message" showDetail="false"/>
 				<h:panelGrid>
-				<h:outputLabel value="Assunto" for="txt_assunto" />
-				<p:inputTextarea scrollHeight="5" value="#{solicitacaoController.solicitacao.descAssunto}" id="txt_assunto" />
-				
-				<h:outputLabel value="Descrição" for="txt_descricao" />
-				<p:inputTextarea value="#{solicitacaoController.solicitacao.descProblema}" id="txt_descricao" />
-				
-				<h:outputLabel value="Setor Origem*"/>
-                <p:selectOneMenu value="#{solicitacaoController.solicitacao.setorByIdSetorOrigem}"
-                                 converter="setorConverter">
-                    <f:selectItem itemLabel="Selecione um setor" itemValue=""/>
-                    <f:selectItems value="#{setorController.todos()}"
-                                   var="s"
-                                   itemLabel="#{s.nomeSetor}"
-                                   itemValue="#{s}"/>
-                </p:selectOneMenu>
-                
+					<h:outputLabel value="Assunto" for="txt_assunto" />
+					<p:inputTextarea scrollHeight="5" value="#{solicitacaoController.solicitacao.descAssunto}" id="txt_assunto" />
+					
+					<h:outputLabel value="Descrição" for="txt_descricao" />
+					<p:inputTextarea value="#{solicitacaoController.solicitacao.descProblema}" id="txt_descricao" />
+					
+					
+					<h:outputLabel value="Setor Destino*"/>
+	                <p:selectOneMenu value="#{solicitacaoController.solicitacao.setorByIdSetorDestino}"
+	                                 converter="setorConverter">
+	                    <f:selectItem itemLabel="Selecione um setor" itemValue=""/>
+	                    <f:selectItems value="#{setorController.todos()}"
+	                                   var="s"
+	                                   itemLabel="#{s.nomeSetor}"
+	                                   itemValue="#{s}"/>
+	                </p:selectOneMenu>
+	                
+	                <h:outputLabel value="Prioridade*"/>
+	                <p:selectOneMenu value="#{solicitacaoController.solicitacao.prioridade}"
+	                                 converter="prioridadeConverter">
+	                    <f:selectItem itemLabel="Prioridade" itemValue=""/>
+	                    <f:selectItems value="#{prioridadeController.todos()}"
+	                                   var="p"
+	                                   itemLabel="#{p.descricao}"
+	                                   itemValue="#{p}"/>
+	                </p:selectOneMenu>
+	                
+	                <h3>Data Desejada</h3>  
+    				<p:calendar value="#{solicitacaoController.solicitacao.dataDesejada}" id="dataDesejada" />  
+	                
+	                
+	                
+	                
+	                
 				</h:panelGrid>
 			</p:panel>
 		</h:form>

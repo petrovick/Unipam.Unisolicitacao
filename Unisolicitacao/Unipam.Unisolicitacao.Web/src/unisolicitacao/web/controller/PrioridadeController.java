@@ -70,7 +70,7 @@ public class PrioridadeController
 		}
 	}
 	
-	public List<Prioridade> getPrioridadeSelectItem()
+	public List<Prioridade> todos()
 	{
 		return prioridadeApplication.todos();
 	}
