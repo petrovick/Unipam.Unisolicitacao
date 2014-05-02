@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+     
+	 <p:fieldset legend="Cadastrar Prioridades" >
+		<h:form id="formCadastro">
+			<p:panel header="Propriedades" id="painelCadastro">
+				<p:growl id="message" showDetail="false"/>
+				<h:panelGrid>
+					<h:outputLabel value="Prioridade:" for="txt_prioridade" />
+					<p:inputText value="#{prioridadeController.prioridade.descricao}" size="35" id="txt_prioridade" />
+				</h:panelGrid>
+				
+				<p:commandButton value="Salvar"
+					actionListener="#{prioridadeController.salvar()}"
+					update=":formTabela,@form"
+					image="ui-icon ui-icon-disk" />
+				
+				<p:commandButton value="Novo"
+					action="#{prioridadeController.novo()}"
+					update="@form"
+					process="@this"
+					image="ui-icon ui-icon-plisthick"
+					rows="15" />
+			</p:panel>	
+		</h:form>
+	</p:fieldset>
+</ui:fragment>

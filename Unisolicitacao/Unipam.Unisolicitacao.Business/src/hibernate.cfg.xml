@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+		"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</property>
+        <property name="hibernate.connection.driver_class">net.sourceforge.jtds.jdbc.Driver</property>
+        <property name="hibernate.connection.password">123</property>
+        <property name="hibernate.connection.url">jdbc:jtds:sqlserver://localhost:1433/Unisolicitacao</property>
+        <property name="hibernate.connection.username">uni</property>
+        
+        <mapping class="unisolicitacao.Business.Anexo" />
+        <mapping class="unisolicitacao.Business.Atendimento" />
+        <mapping class="unisolicitacao.Business.Avaliacao" />
+        <mapping class="unisolicitacao.business.Conversa" />
+        <mapping class="unisolicitacao.business.ConversaId" />
+        <mapping class="unisolicitacao.business.Encaminhamento" />
+        <mapping class="unisolicitacao.business.Fechamento" />
+        <mapping class="unisolicitacao.business.Prioridade" />
+        <mapping class="unisolicitacao.business.Setor" />
+        <mapping class="unisolicitacao.business.Sistema" />
+        <mapping class="unisolicitacao.business.SistemaModulo" />
+        <mapping class="unisolicitacao.business.Situacao" />
+        <mapping class="unisolicitacao.business.Solicitacao" />
+        <mapping class="unisolicitacao.business.Usuario" />
+    </session-factory>
+</hibernate-configuration>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:c="http://java.sun.com/jsf/jstl/core"
+	  xmlns:p="http://primefaces.org/ui">
+	  <h:head>
+	  	<title>Unisolicitação</title>
+	  </h:head>
+	  <h:body>
+	  	
+
+
+		<p:ajaxStatus onstart="statusDialog.show();" onsuccess="statusDialog.hide();" />
+        
+        <p:dialog modal="true" widgetVar="statusDialog" header="Carregando" draggable="false" closable="false">
+            <p:graphicImage value="#{request.contextPath}/content/images/ajaxloadingbar.gif" />
+        </p:dialog>
+        
+        
+        <p:layout fullPage="true">
+            <p:layoutUnit position="north" size="100" style="color: red;">
+	     		<p:tabMenu activeIndex="0">  
+				    <p:menuitem value="Avaliar" url="/pages/avaliar/index.html" icon="ui-icon-star"/>  
+				    <p:menuitem value="Solicitar" url="/pages/solicitar/index.html" icon="ui-icon-search" />  
+				    <p:menuitem value="Acompanhar" url="/pages/acompanhar/index.html" icon="ui-icon-document"/>
+				    <p:menuitem value="Prioridades" url="/pages/prioridade/index.html" icon="ui-icon-document"/>  
+				</p:tabMenu>  
+            </p:layoutUnit>
+            <p:layoutUnit position="center">
+                <ui:insert name="container">
+                    
+                </ui:insert>
+            </p:layoutUnit>
+            <p:layoutUnit position="south" size="100">
+            Rodapé
+            </p:layoutUnit>
+        </p:layout>
+        
+
+
+
+
+	  </h:body>
+</html>
