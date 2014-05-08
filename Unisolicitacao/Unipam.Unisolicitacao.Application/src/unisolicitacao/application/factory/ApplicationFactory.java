@@ -1,11 +1,13 @@
 package unisolicitacao.application.factory;
 
+import unisolicitacao.application.implementations.AtendimentoApplication;
 import unisolicitacao.application.implementations.PrioridadeApplication;
 import unisolicitacao.application.implementations.SetorApplication;
 import unisolicitacao.application.implementations.SistemaModuloApplication;
 import unisolicitacao.application.implementations.SituacaoApplication;
 import unisolicitacao.application.implementations.SolicitacaoApplication;
 import unisolicitacao.application.implementations.UsuarioApplication;
+import unisolicitacao.application.interfaces.IAtendimentoApplication;
 import unisolicitacao.application.interfaces.IPrioridadeApplication;
 import unisolicitacao.application.interfaces.ISetorApplication;
 import unisolicitacao.application.interfaces.ISistemaModuloApplication;
@@ -53,5 +55,10 @@ public class ApplicationFactory
 	public IUsuarioApplication getUsuarioApplication()
 	{
 		return new UsuarioApplication();
+	}
+	
+	public IAtendimentoApplication getAtendimentoApplication()
+	{
+		return new AtendimentoApplication();
 	}
 }

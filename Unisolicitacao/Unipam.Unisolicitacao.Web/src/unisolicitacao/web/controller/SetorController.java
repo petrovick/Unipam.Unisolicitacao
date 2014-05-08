@@ -16,7 +16,7 @@ import unisolicitacao.business.SistemaModulo;
 public class SetorController
 {
 	private ISetorApplication setorApplication = ApplicationFactory.getInstance().getSetorApplication();
-	private ISolicitacaoApplication solicitacaoApplication = ApplicationFactory.getInstance().getSituacaoApplication();
+	private ISolicitacaoApplication solicitacaoApplication = ApplicationFactory.getInstance().getSolicitacaoApplication();
 	private List<Setor> setores;
 	private Setor setor;
 	

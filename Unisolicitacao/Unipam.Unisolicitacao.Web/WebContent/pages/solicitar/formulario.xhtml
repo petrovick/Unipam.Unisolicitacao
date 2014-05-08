@@ -9,13 +9,12 @@
 		<h:form id="formCadastro">
 			<p:panel header="Solicitação" id="painelCadastro">
 				<p:growl id="message" showDetail="false"/>
-				<h:panelGrid>
+				<h:panelGrid columns="2">
 					<h:outputLabel value="Assunto" for="txt_assunto" />
 					<p:inputTextarea scrollHeight="5" value="#{solicitacaoController.solicitacao.descAssunto}" id="txt_assunto" />
 					
 					<h:outputLabel value="Descrição" for="txt_descricao" />
 					<p:inputTextarea value="#{solicitacaoController.solicitacao.descProblema}" id="txt_descricao" />
-					
 					
 					<h:outputLabel value="Setor Destino*"/>
 	                <p:selectOneMenu value="#{solicitacaoController.solicitacao.setorByIdSetorDestino}"
@@ -24,26 +23,27 @@
 	                    <f:selectItems value="#{setorController.todos()}"
 	                                   var="s"
 	                                   itemLabel="#{s.nomeSetor}"
-	                                   itemValue="#{s}"/>
+	                                   itemValue="#{s}"/> 
 	                </p:selectOneMenu>
 	                
-	                <h:outputLabel value="Prioridade*"/>
+					<h:outputLabel value="Prioridade*"/>
 	                <p:selectOneMenu value="#{solicitacaoController.solicitacao.prioridade}"
 	                                 converter="prioridadeConverter">
-	                    <f:selectItem itemLabel="Prioridade" itemValue=""/>
+	                    <f:selectItem itemLabel="Selecione uma prioridade" itemValue=""/>
 	                    <f:selectItems value="#{prioridadeController.todos()}"
 	                                   var="p"
 	                                   itemLabel="#{p.descricao}"
-	                                   itemValue="#{p}"/>
+	                                   itemValue="#{p}"/> 
 	                </p:selectOneMenu>
 	                
 	                <h3>Data Desejada</h3>  
-    				<p:calendar value="#{solicitacaoController.solicitacao.dataDesejada}" id="dataDesejada" />  
-	                
-	                
-	                
-	                
-	                
+    				<p:calendar value="#{solicitacaoController.solicitacao.dataDesejada}" id="dataDesejada" />
+    				
+	                <p:commandButton
+		                value="Gerar"
+		                icon="ui-icon-disk" 
+		                actionListener="#{solicitacaoController.salvar()}" 
+		                update="painelCadastro" />
 				</h:panelGrid>
 			</p:panel>
 		</h:form>

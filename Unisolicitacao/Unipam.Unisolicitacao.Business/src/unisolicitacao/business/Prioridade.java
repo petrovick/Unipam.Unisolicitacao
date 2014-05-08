@@ -69,4 +69,32 @@ public class Prioridade implements java.io.Serializable {
 		this.solicitacaos = solicitacaos;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((idPrioridade == null) ? 0 : idPrioridade.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Prioridade other = (Prioridade) obj;
+		if (idPrioridade == null) {
+			if (other.idPrioridade != null)
+				return false;
+		} else if (!idPrioridade.equals(other.idPrioridade))
+			return false;
+		return true;
+	}
+	
+	
+
 }

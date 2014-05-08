@@ -5,10 +5,9 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-import unisolicitacao.business.SistemaModulo;
-
-@FacesConverter(value = "SistemaModuloConverter", forClass = SistemaModulo.class)
-public class SistemaModuloConverter implements Converter
+import unisolicitacao.business.Situacao;
+@FacesConverter(value = "situacaoConverter", forClass = Situacao.class)
+public class SituacaoConverter implements Converter
 {
 
 	@Override
@@ -17,25 +16,25 @@ public class SistemaModuloConverter implements Converter
 			return null;
 		try
 		{
-			Integer id = Integer.parseInt(arg2);
-			SistemaModulo sis = new SistemaModulo();
-			sis.setIdSistema(id);
-			return sis;
+			Short id = Short.parseShort(arg2);
+			Situacao sol = new Situacao();
+			sol.setIdSituacao(id);
+			return sol;
 		}
 		catch(Exception ex)
 		{
 			return null;
 		}
-		
 	}
 
 	@Override
 	public String getAsString(FacesContext arg0, UIComponent arg1, Object arg2) {
-		if(arg2 == null || arg2.getClass() != SistemaModulo.class)
+		if(arg2 == null || arg2.getClass() != Situacao.class)
 			return null;
-		SistemaModulo sis = (SistemaModulo) arg2;
-		if(sis.getIdSistema() == null)
+		
+		Situacao sit = (Situacao) arg2;
+		if(sit.getIdSituacao() == null)
 			return null;
-		return sis.getIdSistema().toString();
+		return sit.getIdSituacao().toString();
 	}
 }

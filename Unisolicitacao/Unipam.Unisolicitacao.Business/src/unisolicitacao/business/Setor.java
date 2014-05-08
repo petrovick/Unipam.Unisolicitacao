@@ -4,6 +4,7 @@ package unisolicitacao.business;
 
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -107,5 +108,32 @@ public class Setor implements java.io.Serializable {
 			Set<Solicitacao> solicitacaosForIdSetorOrigem) {
 		this.solicitacaosForIdSetorOrigem = solicitacaosForIdSetorOrigem;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((idSetor == null) ? 0 : idSetor.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Setor other = (Setor) obj;
+		if (idSetor == null) {
+			if (other.idSetor != null)
+				return false;
+		} else if (!idSetor.equals(other.idSetor))
+			return false;
+		return true;
+	}
+	
+	
 
 }

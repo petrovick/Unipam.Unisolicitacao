@@ -26,7 +26,6 @@ public class SistemaModulo implements java.io.Serializable {
 	private Integer idSistema;
 	private Sistema sistema;
 	private String nome;
-	private Integer idSolicitacao;
 	private Set<Solicitacao> solicitacaos = new HashSet<Solicitacao>(0);
 
 	public SistemaModulo() {
@@ -35,14 +34,12 @@ public class SistemaModulo implements java.io.Serializable {
 	public SistemaModulo(Sistema sistema, String nome, Integer idSolicitacao) {
 		this.sistema = sistema;
 		this.nome = nome;
-		this.idSolicitacao = idSolicitacao;
 	}
 
 	public SistemaModulo(Sistema sistema, String nome, Integer idSolicitacao,
 			Set<Solicitacao> solicitacaos) {
 		this.sistema = sistema;
 		this.nome = nome;
-		this.idSolicitacao = idSolicitacao;
 		this.solicitacaos = solicitacaos;
 	}
 
@@ -75,15 +72,6 @@ public class SistemaModulo implements java.io.Serializable {
 
 	public void setNome(String nome) {
 		this.nome = nome;
-	}
-
-	@Column(name = "IdSolicitacao", nullable = false)
-	public Integer getIdSolicitacao() {
-		return this.idSolicitacao;
-	}
-
-	public void setIdSolicitacao(Integer idSolicitacao) {
-		this.idSolicitacao = idSolicitacao;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "sistemaModulo")

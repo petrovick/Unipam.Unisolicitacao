@@ -18,23 +18,18 @@ public class Sistema implements java.io.Serializable {
 
 	private Integer codigoDoSistemaNoUniseguranca;
 	private String nome;
-	private Integer idSolicitacao;
-	private SistemaModulo sistemaModulo;
 
 	public Sistema() {
 	}
 
 	public Sistema(Integer codigoDoSistemaNoUniseguranca, Integer idSolicitacao) {
 		this.codigoDoSistemaNoUniseguranca = codigoDoSistemaNoUniseguranca;
-		this.idSolicitacao = idSolicitacao;
 	}
 
 	public Sistema(Integer codigoDoSistemaNoUniseguranca, String nome,
 			Integer idSolicitacao, SistemaModulo sistemaModulo) {
 		this.codigoDoSistemaNoUniseguranca = codigoDoSistemaNoUniseguranca;
 		this.nome = nome;
-		this.idSolicitacao = idSolicitacao;
-		this.sistemaModulo = sistemaModulo;
 	}
 
 	@Id
@@ -56,23 +51,4 @@ public class Sistema implements java.io.Serializable {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
-	@Column(name = "IdSolicitacao", nullable = false)
-	public Integer getIdSolicitacao() {
-		return this.idSolicitacao;
-	}
-
-	public void setIdSolicitacao(Integer idSolicitacao) {
-		this.idSolicitacao = idSolicitacao;
-	}
-
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "sistema")
-	public SistemaModulo getSistemaModulo() {
-		return this.sistemaModulo;
-	}
-
-	public void setSistemaModulo(SistemaModulo sistemaModulo) {
-		this.sistemaModulo = sistemaModulo;
-	}
-
 }

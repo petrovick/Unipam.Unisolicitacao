@@ -1,35 +1,39 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:fragment
-    xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-    xmlns:p="http://primefaces.org/ui">
-    
-    <p:dataTable emptyMessage="Nenhuma Solicitação cadastrada" paginator="true" rows="10"  value="#{pessoaManagedBean.listar()}" var="pessoa">
-            <p:column style="width: 20%" headerText="Responsável">
-                
-            </p:column>
-            <p:column style="width: 5%" headerText="Nº Solicitação">
-                
-            </p:column>
-            <p:column style="width: 5%" headerText="Nº Atividade">
-                
-            </p:column>
-            <p:column style="width: 20%" headerText="Solicitante">
-                
-            </p:column>
-            <p:column style="width: 20%" headerText="Solicitado">
-                
-            </p:column>
-            <p:column style="width: 25%" headerText="Descrição">
-                
-            </p:column>
-            <p:column style="width: 5%" headerText="">
-                
-            </p:column>
-            
-        </p:dataTable>
-        
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:form id="formTabela">
+	    
+	    <p:contextMenu for="tabela">
+		    <p:menuitem value="Detalhar" icon="ui-icon-close" ajax="false" action="#{solicitacaoController.detalhar()}"  />
+		</p:contextMenu>
+	    <p:growl id="message" showDetail="false" />
+	    <p:dataTable var="sol" id="tabela"
+	    value="#{solicitacaoController.todosAvaliar()}"
+	    paginator="true" rows="10"
+	    emptyMessage="Nenhuma Solicitação cadastrada"
+	    rowKey="#{sol.idSolicitacao}"
+	    selection="#{solicitacaoController.solicitacaoSelecionada}"
+	    selectionMode="single" >
+	            <p:column style="width: 20%" headerText="Responsável">
+	          		
+	            </p:column>
+	            <p:column style="width: 10%" headerText="Nº Solicitação">
+	                #{sol.idSolicitacao}
+	            </p:column>
+	            <p:column style="width: 10%" headerText="Solicitante">
+					#{sol.setorByIdSetorOrigem.nomeSetor}
+	            </p:column>
+	            <p:column style="width: 10%" headerText="Solicitado">
+	                #{sol.setorByIdSetorDestino.nomeSetor}
+	            </p:column>
+	            <p:column style="width: 45%" headerText="Assunto">
+	                #{sol.descAssunto}
+	            </p:column>
+		</p:dataTable>
+	</h:form>
 </ui:fragment>
     

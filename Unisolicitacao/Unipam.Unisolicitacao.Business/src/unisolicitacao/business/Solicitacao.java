@@ -2,13 +2,17 @@ package unisolicitacao.business;
 
 // Generated 29/04/2014 16:22:41 by Hibernate Tools 3.4.0.CR1
 
-import java.sql.Clob;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -26,32 +30,29 @@ import javax.persistence.TemporalType;
 public class Solicitacao implements java.io.Serializable {
 
 	private Integer idSolicitacao;
-	private Solicitacao solicitacao;
 	private Situacao situacao;
 	private Setor setorByIdSetorDestino;
 	private Setor setorByIdSetorOrigem;
 	private Prioridade prioridade;
 	private SistemaModulo sistemaModulo;
 	private Usuario usuario;
-	private Clob descAssunto;
-	private Clob descProblema;
+	private String descAssunto;
+	private String descProblema;
 	private Date dataSolicitacao;
 	private Date dataDesejada;
-	private Anexo anexo;
+	private List<Anexo> anexos = new ArrayList<Anexo>();
 	private Set<Atendimento> atendimentos = new HashSet<Atendimento>(0);
 	private Set<Conversa> conversas = new HashSet<Conversa>(0);
-	private Set<Solicitacao> solicitacaos = new HashSet<Solicitacao>(0);
 	private Set<Fechamento> fechamentos = new HashSet<Fechamento>(0);
 
 	public Solicitacao() {
 	}
 
-	public Solicitacao(Integer idSolicitacao, Solicitacao solicitacao,
+	public Solicitacao(Integer idSolicitacao,
 			Situacao situacao, Prioridade prioridade,
-			SistemaModulo sistemaModulo, Usuario usuario, Clob descAssunto,
-			Clob descProblema, Date dataSolicitacao) {
+			SistemaModulo sistemaModulo, Usuario usuario, String descAssunto,
+			String descProblema, Date dataSolicitacao) {
 		this.idSolicitacao = idSolicitacao;
-		this.solicitacao = solicitacao;
 		this.situacao = situacao;
 		this.prioridade = prioridade;
 		this.sistemaModulo = sistemaModulo;
@@ -61,16 +62,15 @@ public class Solicitacao implements java.io.Serializable {
 		this.dataSolicitacao = dataSolicitacao;
 	}
 
-	public Solicitacao(Integer idSolicitacao, Solicitacao solicitacao,
+	public Solicitacao(Integer idSolicitacao,
 			Situacao situacao, Setor setorByIdSetorDestino,
 			Setor setorByIdSetorOrigem, Prioridade prioridade,
-			SistemaModulo sistemaModulo, Usuario usuario, Clob descAssunto,
-			Clob descProblema, Date dataSolicitacao, Date dataDesejada,
-			Anexo anexo, Set<Atendimento> atendimentos,
+			SistemaModulo sistemaModulo, Usuario usuario, String descAssunto,
+			String descProblema, Date dataSolicitacao, Date dataDesejada,
+			List<Anexo> anexos, Set<Atendimento> atendimentos,
 			Set<Conversa> conversas, Set<Solicitacao> solicitacaos,
 			Set<Fechamento> fechamentos) {
 		this.idSolicitacao = idSolicitacao;
-		this.solicitacao = solicitacao;
 		this.situacao = situacao;
 		this.setorByIdSetorDestino = setorByIdSetorDestino;
 		this.setorByIdSetorOrigem = setorByIdSetorOrigem;
@@ -81,14 +81,14 @@ public class Solicitacao implements java.io.Serializable {
 		this.descProblema = descProblema;
 		this.dataSolicitacao = dataSolicitacao;
 		this.dataDesejada = dataDesejada;
-		this.anexo = anexo;
+		this.anexos = anexos;
 		this.atendimentos = atendimentos;
 		this.conversas = conversas;
-		this.solicitacaos = solicitacaos;
 		this.fechamentos = fechamentos;
 	}
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "IdSolicitacao", unique = true, nullable = false)
 	public Integer getIdSolicitacao() {
 		return this.idSolicitacao;
@@ -97,17 +97,6 @@ public class Solicitacao implements java.io.Serializable {
 	public void setIdSolicitacao(Integer idSolicitacao) {
 		this.idSolicitacao = idSolicitacao;
 	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "idSolicitacaoGerada", nullable = true)
-	public Solicitacao getSolicitacao() {
-		return this.solicitacao;
-	}
-
-	public void setSolicitacao(Solicitacao solicitacao) {
-		this.solicitacao = solicitacao;
-	}
-
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "IdSituacao", nullable = false)
 	public Situacao getSituacao() {
@@ -119,7 +108,7 @@ public class Solicitacao implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "IdSetorDestino")
+	@JoinColumn(name = "IdSetorDestino", nullable = false)
 	public Setor getSetorByIdSetorDestino() {
 		return this.setorByIdSetorDestino;
 	}
@@ -139,7 +128,7 @@ public class Solicitacao implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "IdPrioridade", nullable = false)
+	@JoinColumn(name = "IdPrioridade"/*, nullable = false*/)
 	public Prioridade getPrioridade() {
 		return this.prioridade;
 	}
@@ -169,20 +158,20 @@ public class Solicitacao implements java.io.Serializable {
 	}
 
 	@Column(name = "DescAssunto", nullable = false)
-	public Clob getDescAssunto() {
+	public String getDescAssunto() {
 		return this.descAssunto;
 	}
 
-	public void setDescAssunto(Clob descAssunto) {
+	public void setDescAssunto(String descAssunto) {
 		this.descAssunto = descAssunto;
 	}
 
 	@Column(name = "DescProblema", nullable = false)
-	public Clob getDescProblema() {
+	public String getDescProblema() {
 		return this.descProblema;
 	}
 
-	public void setDescProblema(Clob descProblema) {
+	public void setDescProblema(String descProblema) {
 		this.descProblema = descProblema;
 	}
 
@@ -206,13 +195,13 @@ public class Solicitacao implements java.io.Serializable {
 		this.dataDesejada = dataDesejada;
 	}
 
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "solicitacao")
-	public Anexo getAnexo() {
-		return this.anexo;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "solicitacao")
+	public List<Anexo> getAnexos() {
+		return this.anexos;
 	}
 
-	public void setAnexo(Anexo anexo) {
-		this.anexo = anexo;
+	public void setAnexos(List<Anexo> anexos) {
+		this.anexos = anexos;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "solicitacao")
@@ -231,15 +220,6 @@ public class Solicitacao implements java.io.Serializable {
 
 	public void setConversas(Set<Conversa> conversas) {
 		this.conversas = conversas;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "solicitacao")
-	public Set<Solicitacao> getSolicitacaos() {
-		return this.solicitacaos;
-	}
-
-	public void setSolicitacaos(Set<Solicitacao> solicitacaos) {
-		this.solicitacaos = solicitacaos;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "solicitacao")

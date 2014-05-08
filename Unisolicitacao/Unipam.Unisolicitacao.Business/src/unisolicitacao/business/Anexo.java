@@ -2,15 +2,18 @@ package unisolicitacao.business;
 
 // Generated 29/04/2014 16:22:41 by Hibernate Tools 3.4.0.CR1
 
-import java.sql.Clob;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
@@ -21,37 +24,36 @@ import org.hibernate.annotations.Parameter;
 @Table(name = "Anexo", schema = "dbo", catalog = "Unisolicitacao")
 public class Anexo implements java.io.Serializable {
 
-	private Integer idSolicitacao;
+	private Integer idAnexo;
 	private Solicitacao solicitacao;
 	private String tipoAnexado;
-	private Clob conteudoDoAnexo;
+	private String conteudoDoAnexo;
 	private String nomeDoAnexo;
 
 	public Anexo() {
 	}
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "idAnexo", unique = true, nullable = false)
+	public Integer getIdAnexo() {
+		return idAnexo;
+	}
+
+	public void setIdAnexo(Integer idAnexo) {
+		this.idAnexo = idAnexo;
+	}
+
 	public Anexo(Solicitacao solicitacao, String tipoAnexado,
-			Clob conteudoDoAnexo, String nomeDoAnexo) {
+			String conteudoDoAnexo, String nomeDoAnexo) {
 		this.solicitacao = solicitacao;
 		this.tipoAnexado = tipoAnexado;
 		this.conteudoDoAnexo = conteudoDoAnexo;
 		this.nomeDoAnexo = nomeDoAnexo;
 	}
 
-	@GenericGenerator(name = "generator", strategy = "foreign", parameters = @Parameter(name = "property", value = "solicitacao"))
-	@Id
-	@GeneratedValue(generator = "generator")
-	@Column(name = "IdSolicitacao", unique = true, nullable = false)
-	public Integer getIdSolicitacao() {
-		return this.idSolicitacao;
-	}
-
-	public void setIdSolicitacao(Integer idSolicitacao) {
-		this.idSolicitacao = idSolicitacao;
-	}
-
-	@OneToOne(fetch = FetchType.LAZY)
-	@PrimaryKeyJoinColumn
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "idSolicitacao", nullable = false)
 	public Solicitacao getSolicitacao() {
 		return this.solicitacao;
 	}
@@ -70,11 +72,11 @@ public class Anexo implements java.io.Serializable {
 	}
 
 	@Column(name = "ConteudoDoAnexo", nullable = false)
-	public Clob getConteudoDoAnexo() {
+	public String getConteudoDoAnexo() {
 		return this.conteudoDoAnexo;
 	}
 
-	public void setConteudoDoAnexo(Clob conteudoDoAnexo) {
+	public void setConteudoDoAnexo(String conteudoDoAnexo) {
 		this.conteudoDoAnexo = conteudoDoAnexo;
 	}
 

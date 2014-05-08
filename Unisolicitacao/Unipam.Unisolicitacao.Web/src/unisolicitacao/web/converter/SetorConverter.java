@@ -7,7 +7,7 @@ import javax.faces.convert.FacesConverter;
 
 import unisolicitacao.business.Setor;
 import unisolicitacao.business.Solicitacao;
-@FacesConverter(value = "setorConverter")
+@FacesConverter(value = "setorConverter", forClass = Setor.class)
 public class SetorConverter implements Converter
 {
 
@@ -26,14 +26,16 @@ public class SetorConverter implements Converter
 		{
 			return null;
 		}
-		
 	}
 
 	@Override
 	public String getAsString(FacesContext arg0, UIComponent arg1, Object arg2) {
-		if(arg2 == null || arg2.getClass() != Solicitacao.class)
+		if(arg2 == null || arg2.getClass() != Setor.class)
 			return null;
+		
 		Setor sol = (Setor) arg2;
+		if(sol.getIdSetor() == null)
+			return null;
 		return sol.getIdSetor().toString();
 	}
 }

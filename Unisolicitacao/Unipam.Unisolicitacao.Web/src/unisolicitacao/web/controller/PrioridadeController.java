@@ -5,16 +5,18 @@ import java.util.Set;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import unisolicitacao.application.factory.ApplicationFactory;
 import unisolicitacao.application.interfaces.IPrioridadeApplication;
 import unisolicitacao.business.Prioridade;
+import unisolicitacao.business.Setor;
 
 
 @ManagedBean
-@ViewScoped
+@RequestScoped
 public class PrioridadeController
 {
 	private Prioridade prioridade;
@@ -72,7 +74,10 @@ public class PrioridadeController
 	
 	public List<Prioridade> todos()
 	{
-		return prioridadeApplication.todos();
+		List<Prioridade> ss = prioridadeApplication.todos();
+		for(Prioridade s : ss)
+			System.err.println("IdPrioridade:" + s.getIdPrioridade() + "AAMAPrioridade: " + s.getDescricao());
+		return ss;
 	}
 
 	public Prioridade getPrioridadeNewIfNull()

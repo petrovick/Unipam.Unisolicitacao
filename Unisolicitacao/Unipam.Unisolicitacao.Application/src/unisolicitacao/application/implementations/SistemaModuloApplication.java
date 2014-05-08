@@ -10,7 +10,7 @@ public class SistemaModuloApplication extends GenericApplication<SistemaModulo, 
 {
 	@Override
 	public Set<String> salvarSistemaModulo(SistemaModulo sistemaModulo) {
-		if(sistemaModulo.getIdSolicitacao() == null || sistemaModulo.getIdSistema() == 0)
+		if(sistemaModulo.getIdSistema() == null || sistemaModulo.getIdSistema() == 0)
 			return super.inserir(sistemaModulo);
 		else
 			return super.alterar(sistemaModulo);

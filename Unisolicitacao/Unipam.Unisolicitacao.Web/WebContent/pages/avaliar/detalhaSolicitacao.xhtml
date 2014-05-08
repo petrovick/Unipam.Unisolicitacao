@@ -1,0 +1,93 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core" >
+    <ui:composition template="/template/template.xhtml">
+    	<ui:define name="container">
+				<h:form id="formSolicitacao">
+					<p:panel header="Propriedades" id="painelSolicitacao" >
+						<p:growl id="message" showDetail="false"/>
+						
+						<h:panelGrid columns="3"  cellpadding="20">
+							<h:outputLabel value="Nº Solicitacao" />
+							<h:outputLabel value="Data Solicitação" />
+							<h:outputLabel value="Anexo" />
+							
+							<h:outputLabel value="#{solicitacaoController.solicitacao.idSolicitacao}" />
+							<h:outputLabel value="#{solicitacaoController.solicitacao.dataSolicitacao}" />
+							<p:panelGrid columns="1">
+								<ui:repeat var="anexo" value="#{solicitacaoController.solicitacao.anexos}">
+									<b>#{anexo.conteudoDoAnexo}</b>
+								</ui:repeat>
+							</p:panelGrid>
+							
+						</h:panelGrid>
+						<h:panelGrid columns="3"  cellpadding="20">
+							<h:outputLabel value="Solicitante" />
+							<h:outputLabel value="Data Desejada" />
+							<h:outputLabel value="Prioridade" />
+							<h:outputLabel value="#{solicitacaoController.solicitacao.setorByIdSetorOrigem.nomeSetor}"/>
+							<h:outputLabel value="#{solicitacaoController.solicitacao.dataDesejada}"><h:outputLabel value="#{solicitacaoController.solicitacao.prioridade.descricao}" /></h:outputLabel>
+							
+						</h:panelGrid>
+						<h:panelGrid columns="1">
+							<h:outputLabel value="Assunto"/>
+							<h:inputTextarea value="#{solicitacaoController.solicitacao.descAssunto}"/>
+							<h:outputLabel value="Descricao"/>
+							<h:inputTextarea value="#{solicitacaoController.solicitacao.descProblema}"/>
+						</h:panelGrid>
+						
+                    	
+						
+			                 
+                    	<!-- Essa parte vai gerar o atendimento -->
+                    	<h:panelGroup columns="2">
+                    		
+                    		<!--p:commandButton value="Gerar Atendimento"
+								
+								update="@form"
+								process="@this"
+								image="ui-icon ui-icon-plisthick"
+								rows="15" /-->
+								
+								<!-- Verificar o process="@this" do Gerar Atendimento -->
+								<p:commandButton value="Gerar Atendimento"
+					                actionListener="#{solicitacaoController.gerarAtendimento(solicitacaoController.solicitacao)}"
+					                update="atendimento"
+					                />
+								
+								<p:outputPanel id="atendimento" >
+									<p:panel rendered="#{solicitacaoController.solicitacao.situacao.idSituacao == 2}" header="Atendimento">
+										<h:panelGrid columns="2" >
+											
+											Teste - #{solicitacaoController.solicitacao.descAssunto}
+				                    		<h:outputText value="Previsão Início Atendimento*:" />
+									        <p:calendar value="#{atendimentoController.atendimento.dataInicioAtendimento}" id="dataInicioAtendimento" showOn="button" />
+									        
+									        <h:outputText value="Previsão Fim Atendimento:" />
+									        <p:calendar value="#{atendimentoController.atendimento.dataFimAtendimento}" id="dataFimAtendimento" showOn="button" />
+									        
+									        <h:outputText value="Solicitacao:" />
+									        <p:selectOneMenu id="SelectSolicitacao" 
+									        	converter="solicitacaoConverter"
+					                    	value="#{atendimentoController.atendimento.solicitacao}">
+							                    <f:selectItem itemLabel="#{solicitacaoController.solicitacao.idSolicitacao}" 
+							                    			  itemValue="#{solicitacaoController.solicitacao}"/>
+						                	</p:selectOneMenu>
+						                	
+					                    	<p:commandButton value="Salvar"
+					                    			actionListener="#{atendimentoController.imprime()}"
+													/>
+											
+			                    	</h:panelGrid>
+								</p:panel>
+							</p:outputPanel>
+                    	</h:panelGroup>
+                    	
+                    	
+					</p:panel>	
+				</h:form>
+    	</ui:define>
+    </ui:composition>
+</html>
