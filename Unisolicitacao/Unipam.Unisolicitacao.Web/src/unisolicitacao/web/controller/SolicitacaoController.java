@@ -1,5 +1,6 @@
 package unisolicitacao.web.controller;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -30,7 +31,7 @@ import unisolicitacao.business.Situacao;
 import unisolicitacao.business.Solicitacao;
 import unisolicitacao.business.Usuario;
 @ManagedBean
-@RequestScoped
+@ViewScoped
 public class SolicitacaoController implements Serializable
 {
 	private Solicitacao solicitacao;
@@ -99,10 +100,29 @@ public class SolicitacaoController implements Serializable
 			atualizarTabela();
 		}
 	}
-	public String detalhar()
+	
+	
+	@PostConstruct
+	public void inicializar()
 	{
-		solicitacao = solicitacaoSelecionada;
-		return "detalhaSolicitacao.xhtml";
+		String id = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
+		if(id != null)
+		{
+			solicitacao = solicitacaoApplication.obter(Integer.parseInt(id), "setorByIdSetorOrigem", "setorByIdSetorDestino", "anexos", "prioridade", "situacao");
+		}
+	}
+	
+	public void detalhar()
+	{
+		try
+		{
+			FacesContext.getCurrentInstance().getExternalContext().redirect("detalhaSolicitacao.html?id=" + solicitacaoSelecionada.getIdSolicitacao());
+		}
+		catch(IOException io)
+		{
+			io.printStackTrace();
+		}
+//		return "detalhaSolicitacao.xhtml";
 	}	
 	public void gerarAtendimento(Solicitacao s)
 	{
@@ -115,6 +135,11 @@ public class SolicitacaoController implements Serializable
 	{
 		solicitacao.setSituacao(situacaoApplication.obter((short)3));
 		System.err.println("IdSituacao: " + solicitacao.getSituacao().getIdSituacao());
+	}
+	
+	public void imprime()
+	{
+		System.out.println("teste");
 	}
 	public void editar()
 	{

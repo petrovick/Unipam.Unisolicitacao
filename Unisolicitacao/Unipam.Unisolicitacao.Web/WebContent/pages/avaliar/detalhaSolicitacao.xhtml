@@ -37,57 +37,41 @@
 							<h:outputLabel value="Descricao"/>
 							<h:inputTextarea value="#{solicitacaoController.solicitacao.descProblema}"/>
 						</h:panelGrid>
-						
-                    	
-						
+				
 			                 
                     	<!-- Essa parte vai gerar o atendimento -->
-                    	<h:panelGroup columns="2">
                     		
-                    		<!--p:commandButton value="Gerar Atendimento"
-								
-								update="@form"
-								process="@this"
-								image="ui-icon ui-icon-plisthick"
-								rows="15" /-->
-								
 								<!-- Verificar o process="@this" do Gerar Atendimento -->
 								<p:commandButton value="Gerar Atendimento"
 					                actionListener="#{solicitacaoController.gerarAtendimento(solicitacaoController.solicitacao)}"
-					                update="atendimento"
+					                update=":teste:atendimento"
 					                />
-								
-								<p:outputPanel id="atendimento" >
-									<p:panel rendered="#{solicitacaoController.solicitacao.situacao.idSituacao == 2}" header="Atendimento">
-										<h:panelGrid columns="2" >
-											
-											Teste - #{solicitacaoController.solicitacao.descAssunto}
-				                    		<h:outputText value="Previsão Início Atendimento*:" />
-									        <p:calendar value="#{atendimentoController.atendimento.dataInicioAtendimento}" id="dataInicioAtendimento" showOn="button" />
-									        
-									        <h:outputText value="Previsão Fim Atendimento:" />
-									        <p:calendar value="#{atendimentoController.atendimento.dataFimAtendimento}" id="dataFimAtendimento" showOn="button" />
-									        
-									        <h:outputText value="Solicitacao:" />
-									        <p:selectOneMenu id="SelectSolicitacao" 
-									        	converter="solicitacaoConverter"
-					                    	value="#{atendimentoController.atendimento.solicitacao}">
-							                    <f:selectItem itemLabel="#{solicitacaoController.solicitacao.idSolicitacao}" 
-							                    			  itemValue="#{solicitacaoController.solicitacao}"/>
-						                	</p:selectOneMenu>
-						                	
-					                    	<p:commandButton value="Salvar"
-					                    			actionListener="#{atendimentoController.imprime()}"
-													/>
-											
-			                    	</h:panelGrid>
-								</p:panel>
-							</p:outputPanel>
-                    	</h:panelGroup>
-                    	
-                    	
-					</p:panel>	
+                	</p:panel>
 				</h:form>
+				<h:form id="teste">				
+				<p:outputPanel id="atendimento" >
+					
+						<p:panel rendered="#{solicitacaoController.solicitacao.situacao.idSituacao == 2}" header="Atendimento">
+							<h:panelGrid columns="2" >
+								
+								Teste - #{solicitacaoController.solicitacao.descAssunto}
+	                    		<h:outputText value="Previsão Início Atendimento*:" />
+						        <p:calendar required="true" value="#{atendimentoController.atendimento.dataInicioAtendimento}" id="dataInicioAtendimento" showOn="button" />
+						        
+						        <h:outputText value="Previsão Fim Atendimento:" />
+						        <p:calendar required="true" value="#{atendimentoController.atendimento.dataFimAtendimento}" id="dataFimAtendimento" showOn="button" />
+						        
+		                    	<p:commandButton
+					                value="Salvar"
+					                icon="ui-icon-disk" 
+					                actionListener="#{atendimentoController.imprime(solicitacaoController.solicitacao)}" 
+					                 />
+								
+	                   	</h:panelGrid>
+					</p:panel>
+				
+			</p:outputPanel>
+			</h:form>
     	</ui:define>
     </ui:composition>
 </html>

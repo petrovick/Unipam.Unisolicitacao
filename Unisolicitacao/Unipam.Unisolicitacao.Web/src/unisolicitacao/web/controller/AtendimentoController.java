@@ -6,16 +6,19 @@ import java.util.Set;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import unisolicitacao.application.factory.ApplicationFactory;
+import unisolicitacao.application.implementations.UsuarioApplication;
 import unisolicitacao.application.interfaces.IAtendimentoApplication;
+import unisolicitacao.application.interfaces.IUsuarioApplication;
 import unisolicitacao.business.Atendimento;
 import unisolicitacao.business.Solicitacao;
 import unisolicitacao.business.Usuario;
 
 @ManagedBean
-@RequestScoped
+@ViewScoped
 public class AtendimentoController
 {
 	private Atendimento atendimento;
@@ -25,6 +28,7 @@ public class AtendimentoController
 	private Solicitacao idSolicitacao;
 	
 	private IAtendimentoApplication atendimentoApplication = ApplicationFactory.getInstance().getAtendimentoApplication();
+	private IUsuarioApplication usuarioApplication = ApplicationFactory.getInstance().getUsuarioApplication();
 	
 	/*
 	public AtendimentoController()
@@ -47,10 +51,18 @@ public class AtendimentoController
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, erros.iterator().next(), null));
 	}
 	
-	public String imprime()
+	public void imprime(Solicitacao sol)
 	{
-		System.out.println("sssss: " + atendimento.getSolicitacao());
-		return "index.xhtml";
+		atendimento.setSolicitacao(sol);
+		atendimento.setUsuario(usuarioApplication.obter(1));
+		System.out.println("DataInicio:" + atendimento.getDataInicioAtendimento());
+		System.out.println("DataFim:" + atendimento.getDataFimAtendimento());
+		System.out.println("Solicitacao:" + atendimento.getSolicitacao().getIdSolicitacao());
+		System.out.println("usuário:" + atendimento.getUsuario().getIdUsuario());
+		
+		
+		atendimentoApplication.salvarAtendimento(atendimento);
+		System.out.println("Salvou!");
 	}
 	
 	public void editar()
