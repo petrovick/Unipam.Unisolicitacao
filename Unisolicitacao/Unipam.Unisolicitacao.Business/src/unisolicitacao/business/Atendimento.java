@@ -28,6 +28,7 @@ public class Atendimento implements java.io.Serializable {
 
 	private Integer idAtendimento;
 	private Usuario usuario;
+	private String descAtendimento;
 	private Solicitacao solicitacao;
 	private Date dataInicioAtendimento;
 	private Date dataFimAtendimento;
@@ -117,7 +118,18 @@ public class Atendimento implements java.io.Serializable {
 	public void setDataFimAtendimento(Date dataFimAtendimento) {
 		this.dataFimAtendimento = dataFimAtendimento;
 	}
-
+	
+	@Column(name = "descAtendimento", length = 255)
+	public String getDescAtendimento()
+	{
+		return this.descAtendimento;
+	}
+	
+	public void setDescAtendimento(String descAtendimento)
+	{
+		this.descAtendimento = descAtendimento;
+	}
+	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "atendimentoByIdAtendimentoReceptor")
 	public Set<Encaminhamento> getEncaminhamentosForIdAtendimentoReceptor() {
 		return this.encaminhamentosForIdAtendimentoReceptor;
@@ -155,5 +167,6 @@ public class Atendimento implements java.io.Serializable {
 	public void setConversas(Set<Conversa> conversas) {
 		this.conversas = conversas;
 	}
+	
 
 }

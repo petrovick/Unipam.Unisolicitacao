@@ -29,11 +29,14 @@ public class SolicitacaoApplication extends GenericApplication<Solicitacao, Inte
 	}
 
 	@Override
-	public List<Solicitacao> listarPorSolicitacao(Integer numeroSolicitacao, String... joins) {
+	public List<Solicitacao> solicitacaoParaAvaliarOuPendente(String... joins)
+	{
 		DetachedCriteria criteria = DetachedCriteria.forClass(Solicitacao.class);
-		criteria.add(Restrictions.eq("idSolicitacao", numeroSolicitacao));
+		criteria.add(Restrictions.in("situacao.idSituacao", new Object[]{(short)1,(short)2}));
 		CriteriaInclude.include(criteria, joins);
 		return repository.find(criteria);		
 	}
+
+	
 	 
 }

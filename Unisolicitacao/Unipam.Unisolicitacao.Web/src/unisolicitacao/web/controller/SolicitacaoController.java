@@ -78,14 +78,21 @@ public class SolicitacaoController implements Serializable
 		else
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, erros.iterator().next(), null));
 	}
+	
+	public List<Solicitacao> acompanhar()
+	{
+		return solicitacaoApplication.todos("setorByIdSetorOrigem", "setorByIdSetorDestino", "anexos", "prioridade", "situacao");
+	}
+	
 	public void novo()
 	{
 		this.solicitacao = new Solicitacao();
 	}
 	public List<Solicitacao> todosAvaliar()
 	{
-		return solicitacaoApplication.todos("setorByIdSetorOrigem", "setorByIdSetorDestino", "anexos", "prioridade", "situacao");
+		return solicitacaoApplication.solicitacaoParaAvaliarOuPendente("setorByIdSetorOrigem", "setorByIdSetorDestino", "anexos", "prioridade", "situacao");
 	}
+	
 	public List<Solicitacao> todos()
 	{
 		return solicitacaoApplication.todos();
@@ -100,7 +107,6 @@ public class SolicitacaoController implements Serializable
 			atualizarTabela();
 		}
 	}
-	
 	
 	@PostConstruct
 	public void inicializar()
@@ -133,11 +139,25 @@ public class SolicitacaoController implements Serializable
 	
 	public void recusarSolicitacao()
 	{
+		System.out.println("foi la ta.");
+		/*
 		solicitacao.setSituacao(situacaoApplication.obter((short)3));
 		System.err.println("IdSituacao: " + solicitacao.getSituacao().getIdSituacao());
+		solicitacaoApplication.alterar(solicitacao);
+		System.out.println("Salvo!");
+		
+		System.out.println("External:" + FacesContext.getCurrentInstance().getExternalContext());
+		
+			try {
+				FacesContext.getCurrentInstance().getExternalContext().redirect("index.html");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		*/
 	}
 	
-	public void imprime()
+	public void salvarAtendimento()
 	{
 		System.out.println("teste");
 	}

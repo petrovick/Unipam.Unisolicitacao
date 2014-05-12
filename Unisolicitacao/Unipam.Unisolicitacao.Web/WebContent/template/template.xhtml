@@ -8,18 +8,50 @@
 	  xmlns:p="http://primefaces.org/ui">
 	  <h:head>
 	  	<title>Unisolicitação</title>
+	  	
+	  	<link href="#{request.contextPath}/css/css.css" rel="stylesheet" type="text/css" />
+	  	<link href="#{request.contextPath}/css/superfish.css" rel="stylesheet" type="text/css" />
+	  	<link href="#{request.contextPath}/js/superfish.js" type="text/javascript" />
+	  	
 	  </h:head>
 	  <h:body>
 	  	
-
-
-		<p:ajaxStatus onstart="statusDialog.show();" onsuccess="statusDialog.hide();" />
+	  	<p:ajaxStatus onstart="statusDialog.show();" onsuccess="statusDialog.hide();" />
         
         <p:dialog modal="true" widgetVar="statusDialog" header="Carregando" draggable="false" closable="false">
-            <p:graphicImage value="#{request.contextPath}/content/images/ajaxloadingbar.gif" />
+            <p:graphicImage value="${pageContext.request.contextPath}/content/images/ajaxloadingbar.gif" />
         </p:dialog>
         
+        <div class="topo">
+        	<p:graphicImage value="/content/images/ajaxloadingbar.gif" />
+        </div>
         
+    	<!--ui:include src="${pageContext.request.contextPath}/content/images/logomarca.png" width="550px" /-->
+        
+        <div id="menu" class="menuHorizontal">
+        	<p:outputPanel rendered="#{usuarioSession != null and usuarioSession.menu != null}">
+        		<h:outputText value="#{usuarioSession.menu}" esape="false" />
+        	</p:outputPanel>
+        </div>
+        
+        <div class="barra">
+        	<p:tabMenu activeIndex="0">  
+				    <p:menuitem value="Avaliar" url="/pages/avaliar/index.html" icon="ui-icon-star"/>  
+				    <p:menuitem value="Solicitar" url="/pages/solicitar/index.html" icon="ui-icon-search" />  
+				    <p:menuitem value="Acompanhar" url="/pages/acompanhar/index.html" icon="ui-icon-document"/>
+				    <p:menuitem value="Prioridades" url="/pages/prioridade/index.html" icon="ui-icon-document"/>  
+				</p:tabMenu>  
+        </div>
+        
+        <div id="container">
+        	<ui:insert name="container">Conteúdo</ui:insert>
+        </div>
+        
+        <div id="footer">
+        	<img src="#{request.contextPath}/content/images/img-rodape.png" style="float: left; margin-left: 10px;"/>
+        	<p>Desenvolvido por UNIPAM 2014</p>
+        </div>
+        <!-- 
         <p:layout fullPage="true">
             <p:layoutUnit position="north" size="100" style="color: red;">
 	     		<p:tabMenu activeIndex="0">  
@@ -38,5 +70,6 @@
             Rodapé
             </p:layoutUnit>
         </p:layout>
+        -->
 	  </h:body>
 </html>
